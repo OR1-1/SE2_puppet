@@ -1,4 +1,4 @@
-node "myhostname" {
+node default {
 
     exec { 'install vim':
         command => "/usr/bin/yum install vim -y",
@@ -31,7 +31,7 @@ node "myhostname" {
         command     => "/usr/bin/wget -q 'https://raw.githubusercontent.com/OR1-1/SE1_memory_check/dev001/memory_check.sh' -O /home/monitor/scripts/memory_check",
         creates     => "/home/monitor/scripts/memory_check",
         refreshonly => true,
-        unless => 'test -f /home/monitor/scripts/memory_check',
+        unless => '/usr/bin/test -f /home/monitor/scripts/memory_check',
         notify => File['/home/monitor/scripts/memory_check'],
     }
     
@@ -52,13 +52,9 @@ node "myhostname" {
         minute  => 10,
     }
 
-    exec { "puppet module install saz-timezone":
-        command => "/usr/bin/puppet module install saz-timezone",
+    exec { "change timezone":
+        command => "/bin/rm -rf /etc/localtime && /bin/ln -s /usr/share/zoneinfo/Asia/Manila /etc/localtime",
     }
-    
-    #class { 'timezone':
-    #    timezone => 'UTC',
-    #}
     
     exec { "set hostname to bpx.server.local":
         command => "/bin/hostname bpx.server.local",
