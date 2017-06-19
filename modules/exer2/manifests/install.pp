@@ -1,14 +1,8 @@
-class exer2::install inherits exer2 {
+class exer2::install ($packages) inherits exer2 {
 
-  package { 'curl':
+  package { $packages:
     ensure => present,
+    allow_virtual => true,
   }
 
-  package { 'git':
-    ensure => present,
-  }
-
-  package { 'wget':
-    ensure => present,
-  }
 }

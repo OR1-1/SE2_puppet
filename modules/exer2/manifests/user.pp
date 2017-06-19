@@ -1,9 +1,13 @@
-class exer2::user inherits exer2 {
+class exer2::user ( 
+  $username,
+  $home,
+  $shell
+) inherits exer2 {
 
-  user { 'monitor':
+  user { $username:
     ensure => 'present',
-    home   => '/home/monitor',
-    shell  => '/bin/bash',
+    home   => $home,
+    shell  => $shell,
   }
 
 }
