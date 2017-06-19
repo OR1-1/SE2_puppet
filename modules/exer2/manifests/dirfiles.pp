@@ -10,7 +10,7 @@ class exer2::dirfiles inherits exer2 {
   }
 
   exec { "download memory_check.sh":
-    command     => "/usr/bin/wget -q 'https://raw.githubusercontent.com/OR1-1/SE1_memory_check/dev001/memory_check.sh' -O /home/monitor/scripts/memory_check",
+    command     => "/usr/bin/wget -q 'https://raw.githubusercontent.com/OR1-1/SE1_memory_check/master/memory_check.sh' -O /home/monitor/scripts/memory_check",
     creates     => "/home/monitor/scripts/memory_check",
     refreshonly => true,
     unless      => '/usr/bin/test -f /home/monitor/scripts/memory_check',
